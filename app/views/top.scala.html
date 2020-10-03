@@ -1,6 +1,4 @@
-@()
-
-@import helper._
+@()(implicit request: RequestHeader)
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,9 +10,10 @@
         <h1>DB接続の練習</h1>
         <p>クリックすると会社員表のデータが一覧表示されます。</p>
 
-        @helper.form(action = helper.CSRF(routes.HomeController.topSubmit)){
-            <input type="submit" name="topBtn" value="会社員表を表示するボタン（POST形式）">
+        @helper.form(action = helper.CSRF(routes.HomeController.topSubmit), Symbol("name") -> "topForm"){
+            <input type="submit" name="topBtn" value="会社員表を表示するボタン（POST形式）"><br>
         }
-        <a href="#" onclick="document.topBtn.submit()">POST形式で呼び出すリンク</a>
+        <a href="#" onclick="document.topForm.submit()">POST形式で呼び出すリンク</a>
+
     </body>
 </html>
