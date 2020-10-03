@@ -1,0 +1,20 @@
+@()
+
+@import helper._
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>top</title>
+    </head>
+    <body>
+        <h1>DB接続の練習</h1>
+        <p>クリックすると会社員表のデータが一覧表示されます。</p>
+
+        @helper.form(action = helper.CSRF(routes.HomeController.topSubmit)){
+            <input type="submit" name="topBtn" value="会社員表を表示するボタン（POST形式）">
+        }
+        <a href="#" onclick="document.topBtn.submit()">POST形式で呼び出すリンク</a>
+    </body>
+</html>

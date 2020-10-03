@@ -20,4 +20,13 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index("Your new application is ready."))
   }
 
+  def top: Action[AnyContent] = Action {
+    Ok(views.html.top())
+  }
+
+  def topSubmit: Action[AnyContent] = Action {
+    Ok(views.html.show())
+  }
+
+
 }
