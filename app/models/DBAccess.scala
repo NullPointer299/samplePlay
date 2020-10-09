@@ -1,5 +1,7 @@
 package models
 
+import java.util.Date
+
 import javax.inject._
 import play.api.db._
 import anorm._
@@ -10,22 +12,48 @@ class DBAccess @Inject()(dbApi: DBApi) {
 
   private val db = dbApi.database("default")
 
-  val parser: RowParser[Int ~ String ~ Int] =
+  val langParser: RowParser[Int ~ String ~ Int] =
     int("id") ~
       str("name") ~
       int("experience")
 
-  val mapper: RowParser[Map[String, Any]] = parser.map {
+  val langMapper: RowParser[Map[String, Any]] = langParser.map {
     case id ~ name ~ experience =>
       Map("id" -> id,
         "name" -> name,
         "experience" -> experience)
   }
 
+  val userParser: RowParser[Int ~ String ~ String ~ String ~ String ~ Date] = {
+    int("id") ~
+      str("user_id") ~
+      str("last_name") ~
+      str("first_name") ~
+      str("mail_address") ~
+      date("hire_date")
+  }
+
+  val userMapper: RowParser[Map[String, Any]] = userParser.map {
+    case id ~ user_id ~ last_name ~ first_name ~ mail_address ~ hire_date =>
+      Map("id" -> id,
+        "user_id" -> user_id,
+        "last_name" -> last_name,
+        "first_name" -> first_name,
+        "mail_address" -> mail_address,
+        "hire_date" -> hire_date)
+  }
+
   def languageList(): List[Map[String, Any]] = {
     db.withConnection { implicit c =>
       SQL("SELECT * FROM language ORDER BY id")
-        .as(mapper.*)
+        .as(langMapper.*)
+    }
+  }
+
+  def userList(): List[Map[String, Any]] = {
+    db.withConnection { implicit c =>
+      SQL("SELECT * FROM user ORDER BY id")
+        .as(userMapper.*)
     }
   }
 
@@ -65,7 +93,7 @@ class DBAccess @Inject()(dbApi: DBApi) {
         "FROM language" +
         "WHERE name = {language}")
         .on("language" -> language)
-        .as(mapper.singleOpt)
+        .as(langMapper.singleOpt)
     }
   }
 

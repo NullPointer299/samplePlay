@@ -18,6 +18,8 @@ POST    /top                        controllers.HomeController.topSubmit
 
 GET     /language_list              controllers.DBController.languageList
 
+GET     /user_list                  controllers.DBController.userList
+
 GET     /insert                     controllers.DBController.insert
 
 GET     /insertTwo                  controllers.DBController.insertTwo

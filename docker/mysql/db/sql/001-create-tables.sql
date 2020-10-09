@@ -17,5 +17,6 @@ CREATE TABLE IF NOT EXISTS `user`
  `last_name`    TEXT        NOT NULL,
  `first_name`   TEXT        NOT NULL,
  `mail_address` TEXT        NOT NULL,
- `hire_date`    DATE        NOT NULL
+ `hire_date`    DATE        NOT NULL,
+    PRIMARY KEY(`id`)
 );

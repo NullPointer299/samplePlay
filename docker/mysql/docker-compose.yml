@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-    # MySQL
     db:
         image: mysql:8
         container_name: mysql
@@ -18,4 +17,3 @@ services:
             - ./db/sql:/docker-entrypoint-initdb.d
         ports:
             - 3306:3306
-

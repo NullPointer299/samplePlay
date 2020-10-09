@@ -13,3 +13,4 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+/docker/mysql/db/data/

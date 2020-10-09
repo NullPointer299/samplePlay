@@ -11,6 +11,10 @@ class DBController @Inject()(db: DBAccess)(cc: ControllerComponents) extends Abs
     Ok(db.languageList().toString)
   }
 
+  def userList: Action[AnyContent] = Action{
+    Ok(db.userList().toString)
+  }
+
   def insert: Action[AnyContent] = Action {
     val ret = db.insert()
     Ok("insert!!!" + ret)
