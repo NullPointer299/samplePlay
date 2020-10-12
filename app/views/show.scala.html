@@ -43,14 +43,14 @@
           </thead>
 
           <tbody>
-            @for(Employee(id, userId, lastName, firstName, mailAddress, hireDate) <- employeeList) {
+            @for(i <- employeeList.indices) {
               <tr>
-                <th scope="row">@id</th>
-                <td>@userId</td>
-                <td>@lastName</td>
-                <td>@firstName</td>
-                <td>@mailAddress</td>
-                <td>@hireDate</td>
+                <th scope="row">@(i + 1)</th>
+                <td>@employeeList(i).userId</td>
+                <td>@employeeList(i).lastName</td>
+                <td>@employeeList(i).firstName</td>
+                <td>@employeeList(i).mailAddress</td>
+                <td>@employeeList(i).hireDate</td>
               </tr>
             }
           </tbody>
@@ -62,7 +62,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
 
-@*            create modal window*@
+            @* create modal window*@
             <div class="modal-header">
               <h5 class="modal-title" id="createModalLabel">Create</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -74,13 +74,28 @@
               <form>
 
                 <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Create:</label>
-                  <input type="text" class="form-control" id="create-name">
+                  <label for="create_user_id" class="col-form-label">User ID:</label>
+                  <input type="text" class="form-control" id="create_user_id">
                 </div>
 
                 <div class="form-group">
-                  <label for="create-text" class="col-form-label"></label>
-                  <textarea class="form-control" id="create-text"></textarea>
+                  <label for="create_last_name" class="col-form-label">Last name:</label>
+                  <input type="text" class="form-control" id="create_last_name">
+                </div>
+
+                <div class="form-group">
+                  <label for="create_first_name" class="col-form-label">First name:</label>
+                  <input type="text" class="form-control" id="create_first_name">
+                </div>
+
+                <div class="form-group">
+                  <label for="create_mail_address" class="col-form-label">Mail address:</label>
+                  <input type="text" class="form-control" id="create_mail_address">
+                </div>
+
+                <div class="form-group">
+                  <label for="create_hire_date" class="col-form-label">Hire date:</label>
+                  <input type="text" class="form-control" id="create_hire_date">
                 </div>
 
               </form>
@@ -88,14 +103,14 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Create:</button>
+              <button type="button" class="btn btn-primary">Create</button>
             </div>
 
           </div>
         </div>
       </div>
 
-@*      update modal window*@
+      @* update modal window*@
       <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -110,14 +125,76 @@
             <div class="modal-body">
               <form>
 
-                <div class="form-group">
-                  <label for="update-name" class="col-form-label">Update:</label>
-                  <input type="text" class="form-control" id="update-name">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" id="updateDropdownNumber" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select #
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="updateDropdownNumber">
+                  @for(i <- employeeList.indices) {
+                    <li><button type="button" class="dropdown-item" value="@(i + 1)">@(i + 1)</button></li>
+                  }
+                  </ul>
                 </div>
 
                 <div class="form-group">
-                  <label for="update-text" class="col-form-label"></label>
-                  <textarea class="form-control" id="update-text"></textarea>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input position-static" type="checkbox" id="userIdCheckbox" value="option1" aria-label="...">
+                  </div>
+
+                  <label for="update_user_id" class="col-form-label">User ID:</label>
+                  <div tabindex="0" data-toggle="tooltip" data-placement="top" title="LOCKED! Check the box!!!">
+                    <input type="text" class="form-control" id="update_user_id" style="pointer-events: none;" disabled>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input position-static" type="checkbox" id="lastNameCheckbox" value="option1" aria-label="...">
+                  </div>
+
+                  <label for="update_last_name" class="col-form-label">Last name:</label>
+
+                  <div tabindex="0" data-toggle="tooltip" data-placement="top" title="LOCKED! Check the box!!!">
+                    <input type="text" class="form-control" id="update_last_name" style="pointer-events: none;" disabled>
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input position-static" type="checkbox" id="firstNameCheckbox" value="option1" aria-label="...">
+                  </div>
+
+                  <label for="update_first_name" class="col-form-label">First name:</label>
+
+                  <div tabindex="0" data-toggle="tooltip" data-placement="top" title="LOCKED! Check the box!!!">
+                    <input type="text" class="form-control" id="update_first_name" style="pointer-events: none;" disabled>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input position-static" type="checkbox" id="mailAddressCheckbox" value="option1" aria-label="...">
+                  </div>
+
+                  <label for="update_mail_address" class="col-form-label">Mail address:</label>
+
+                  <div tabindex="0" data-toggle="tooltip" data-placement="top" title="LOCKED! Check the box!!!">
+                    <input type="text" class="form-control" id="update_mail_address" style="pointer-events: none;" disabled>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input position-static" type="checkbox" id="hireDateCheckbox" value="option1" aria-label="...">
+                  </div>
+
+                  <label for="update_hire_date" class="col-form-label">Hire date:</label>
+
+                  <div tabindex="0" data-toggle="tooltip" data-placement="top" title="LOCKED! Check the box!!!">
+                    <input type="text" class="form-control" id="update_hire_date" style="pointer-events: none;" disabled>
+                  </div>
                 </div>
 
               </form>
@@ -133,7 +210,7 @@
       </div>
 
 
-@*      delete modal window*@
+      @* delete modal window*@
       <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -148,16 +225,41 @@
             <div class="modal-body">
               <form>
 
-                <div class="form-group">
-                  <label for="delete-name" class="col-form-label">Delete:</label>
-                  <input type="text" class="form-control" id="delete-name">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" id="deleteDropdownNumber" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select #
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="deleteDropdownNumber">
+                  @for(i <- employeeList.indices) {
+                    <li><button type="button" class="dropdown-item" value="@(i + 1)">@(i + 1)</button></li>
+                  }
+                  </ul>
                 </div>
 
                 <div class="form-group">
-                  <label for="delete-text" class="col-form-label"></label>
-                  <textarea class="form-control" id="delete-text"></textarea>
+                  <label for="delete_user_id" class="col-form-label">User ID:</label>
+                  <input type="text" class="form-control" id="delete_user_id" disabled>
                 </div>
 
+                <div class="form-group">
+                  <label for="delete_last_name" class="col-form-label">Last name:</label>
+                  <input type="text" class="form-control" id="delete_last_name" disabled>
+                </div>
+
+                <div class="form-group">
+                  <label for="delete_first_name" class="col-form-label">First name:</label>
+                  <input type="text" class="form-control" id="deletefirst_name" disabled>
+                </div>
+
+                <div class="form-group">
+                  <label for="delete_mail_address" class="col-form-label">Mail address:</label>
+                  <input type="text" class="form-control" id="delete_mail_address" disabled>
+                </div>
+
+                <div class="form-group">
+                  <label for="delete_hire_date" class="col-form-label">Hire date:</label>
+                  <input type="text" class="form-control" id="delete_hire_date" disabled>
+                </div>
               </form>
             </div>
 
