@@ -5,14 +5,15 @@ import models.DBAccess
 import play.api.mvc._
 
 @Singleton
-class DBController @Inject()(db: DBAccess)(cc: ControllerComponents) extends AbstractController(cc) {
+class DBController @Inject()(db: DBAccess)(cc: ControllerComponents)
+  extends AbstractController(cc) {
 
   def languageList: Action[AnyContent] = Action {
     Ok(db.languageList().toString)
   }
 
-  def userList: Action[AnyContent] = Action{
-    Ok(db.userList().toString)
+  def employeeList: Action[AnyContent] = Action{
+    Ok(db.employeeList().toString)
   }
 
   def insert: Action[AnyContent] = Action {

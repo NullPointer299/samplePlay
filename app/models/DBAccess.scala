@@ -24,7 +24,7 @@ class DBAccess @Inject()(dbApi: DBApi) {
         "experience" -> experience)
   }
 
-  val userParser: RowParser[Int ~ String ~ String ~ String ~ String ~ Date] = {
+  val employeeParser: RowParser[Int ~ String ~ String ~ String ~ String ~ Date] = {
     int("id") ~
       str("user_id") ~
       str("last_name") ~
@@ -33,14 +33,9 @@ class DBAccess @Inject()(dbApi: DBApi) {
       date("hire_date")
   }
 
-  val userMapper: RowParser[Map[String, Any]] = userParser.map {
+  val employeeMapper: RowParser[Employee] = employeeParser.map {
     case id ~ user_id ~ last_name ~ first_name ~ mail_address ~ hire_date =>
-      Map("id" -> id,
-        "user_id" -> user_id,
-        "last_name" -> last_name,
-        "first_name" -> first_name,
-        "mail_address" -> mail_address,
-        "hire_date" -> hire_date)
+      Employee(id, user_id, last_name, first_name, mail_address, hire_date)
   }
 
   def languageList(): List[Map[String, Any]] = {
@@ -50,10 +45,10 @@ class DBAccess @Inject()(dbApi: DBApi) {
     }
   }
 
-  def userList(): List[Map[String, Any]] = {
+  def employeeList(): List[Employee] = {
     db.withConnection { implicit c =>
       SQL("SELECT * FROM user ORDER BY id")
-        .as(userMapper.*)
+        .as(employeeMapper.*)
     }
   }
 

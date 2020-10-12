@@ -1,12 +1,183 @@
-@()
+@(employeeList: List[Employee])
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>show</title>
-    </head>
-    <body>
-        <h1>***会社員表***</h1>
-    </body>
+  <head>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Employee List</title>
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="row justify-content-center">
+        <h1>Employee List</h1>
+      </div>
+
+      <div class="row">
+        <button type="button" class="col my-1 mx-1 btn btn-primary"
+        id="btnCreate" data-toggle="modal" data-target="#createModal" data-whatever="Create">Create</button>
+        <button type="button" class="col my-1 mx-1 btn btn-warning"
+        id="btnUpdate" data-toggle="modal" data-target="#updateModal" data-whatever="Update">Update</button>
+        <button type="button" class="col my-1 mx-1 btn btn-danger"
+        id="btnDelete" data-toggle="modal" data-target="#deleteModal" data-whatever="Delete">Delete</button>
+      </div>
+
+      <div class="row">
+        <table class="table">
+
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">user_id</th>
+              <th scope="col">last_name</th>
+              <th scope="col">first_name</th>
+              <th scope="col">mail_address</th>
+              <th scope="col">hire_date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for(Employee(id, userId, lastName, firstName, mailAddress, hireDate) <- employeeList) {
+              <tr>
+                <th scope="row">@id</th>
+                <td>@userId</td>
+                <td>@lastName</td>
+                <td>@firstName</td>
+                <td>@mailAddress</td>
+                <td>@hireDate</td>
+              </tr>
+            }
+          </tbody>
+
+        </table>
+      </div>
+
+      <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+@*            create modal window*@
+            <div class="modal-header">
+              <h5 class="modal-title" id="createModalLabel">Create</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form>
+
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Create:</label>
+                  <input type="text" class="form-control" id="create-name">
+                </div>
+
+                <div class="form-group">
+                  <label for="create-text" class="col-form-label"></label>
+                  <textarea class="form-control" id="create-text"></textarea>
+                </div>
+
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Create:</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+@*      update modal window*@
+      <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Update</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form>
+
+                <div class="form-group">
+                  <label for="update-name" class="col-form-label">Update:</label>
+                  <input type="text" class="form-control" id="update-name">
+                </div>
+
+                <div class="form-group">
+                  <label for="update-text" class="col-form-label"></label>
+                  <textarea class="form-control" id="update-text"></textarea>
+                </div>
+
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-warning">Update</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+@*      delete modal window*@
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Update</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form>
+
+                <div class="form-group">
+                  <label for="delete-name" class="col-form-label">Delete:</label>
+                  <input type="text" class="form-control" id="delete-name">
+                </div>
+
+                <div class="form-group">
+                  <label for="delete-text" class="col-form-label"></label>
+                  <textarea class="form-control" id="delete-text"></textarea>
+                </div>
+
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="@routes.Assets.versioned("javascripts/show.js")" type="text/javascript"></script>
+  </body>
 </html>
+

@@ -1,6 +1,7 @@
 package controllers
 
 import javax.inject._
+import models.{DBAccess, Employee}
 import play.api.mvc._
 
 /**
@@ -8,7 +9,8 @@ import play.api.mvc._
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class HomeController @Inject()(db: DBAccess)(cc: ControllerComponents)
+  extends AbstractController(cc) {
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -25,7 +27,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def topSubmit: Action[AnyContent] = Action {
-    Ok(views.html.show())
+    Ok(views.html.show(db.employeeList()))
   }
 
 
