@@ -1,0 +1,79 @@
+@(employeeList: List[Employee])
+@* delete modal window*@
+<div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-number" id="deleteDropdownNumber" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select #</button>
+            <ul class="dropdown-menu" aria-labelledby="deleteDropdownNumber">
+              @for(i <- employeeList.indices) {
+                <li><button type="button" class="dropdown-item dropdown-number" value="@(s"${i + 1}")">@(s"#${i + 1} ${employeeList(i).employeeId}")</button></li>
+              }
+            </ul>
+          </div>
+
+          <div class="form-group">
+            <label for="delete_employee_id" class="col-form-label">User ID:</label>
+            <input type="text" class="form-control input-employee-id" id="delete_employee_id" placeholder="Employee ID" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="delete_last_name" class="col-form-label">Last name:</label>
+            <input type="text" class="form-control input-last-name" id="delete_last_name" placeholder="Last name" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="delete_first_name" class="col-form-label">First name:</label>
+            <input type="text" class="form-control input-first-name" id="delete_first_name" placeholder="First name" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="delete_mail_address" class="col-form-label">Mail address:</label>
+            <input type="text" class="form-control input-mail-address" id="delete_mail_address" placeholder="Mail address" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="delete_hire_date" class="col-form-label">Hire date:</label>
+            <div class="input-group" id="delete_hire_date">
+
+              <button class="btn btn-outline-secondary" type="button" id="btn_calender_delete" disabled>
+                <i class="fa fa-calendar"></i>
+              </button>
+              <input type="text" class="form-control text-center input-hire-date-year" placeholder="Year" aria-label="Year" aria-describedby="btn_calender_delete" disabled>
+
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="month-separator-delete">-</span>
+              </div>
+              <input type="text" class="form-control text-center input-hire-date-month" placeholder="Month" aria-label="Month" aria-describedby="month-separator" disabled>
+
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="day-separator-delete">-</span>
+              </div>
+              <input type="text" class="form-control text-center input-hire-date-day" placeholder="Day" aria-label="Day" aria-describedby="day-separator" disabled>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+@(employeeList: List[Employee])
+
+@LOCKED_MESSAGE = @{
+  "LOCKED! Check on the box!!!"
+}
+
+@* update modal window*@
+<div class="modal fade" id="updateModal" data-backdrop="static" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-number" id="updateDropdownNumber" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select #
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="updateDropdownNumber">
+            @for(i <- employeeList.indices) {
+              <li><button type="button" class="dropdown-item dropdown-number" value="@(s"${i + 1}")">@(s"#${i + 1} ${employeeList(i).employeeId}")</button></li>
+            }
+            </ul>
+          </div>
+
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" aria-label="checkToUnlock">
+            </div>
+
+            <label for="update_employee_id" class="col-form-label">Employee ID:</label>
+            <div class="text-tooltip" tabindex="-1" data-toggle="tooltip" data-placement="top" title="@(LOCKED_MESSAGE)">
+              <input type="text" class="form-control update-text input-employee-id" id="update_employee_id" placeholder="Employee ID" disabled>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="lastNameCheckbox" aria-label="...">
+            </div>
+
+            <label for="update_last_name" class="col-form-label">Last name:</label>
+            <div class="text-tooltip" tabindex="-1" data-toggle="tooltip" data-placement="top" title="@(LOCKED_MESSAGE)">
+              <input type="text" class="form-control update-text input-last-name" id="update_last_name" placeholder="Last name" disabled>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="firstNameCheckbox" aria-label="...">
+            </div>
+
+            <label for="update_first_name" class="col-form-label">First name:</label>
+
+            <div class="text-tooltip" tabindex="-1" data-toggle="tooltip" data-placement="top" title="@(LOCKED_MESSAGE)">
+              <input type="text" class="form-control update-text input-first-name" id="update_first_name" placeholder="First name" disabled>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="mailAddressCheckbox" aria-label="...">
+            </div>
+
+            <label for="update_mail_address" class="col-form-label">Mail address:</label>
+            <div class="text-tooltip" tabindex="-1" data-toggle="tooltip" data-placement="top" title="@(LOCKED_MESSAGE)">
+              <input type="text" class="form-control update-text input-mail-address" id="update_mail_address" placeholder="Mail address" disabled>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="hireDateCheckbox" aria-label="hireDateCheckbox">
+            </div>
+
+            <label for="update_hire_date" class="col-form-label">Hire date:</label>
+
+            <div class="text-tooltip" tabindex="-1" data-toggle="tooltip" data-placement="top" title="@(LOCKED_MESSAGE)">
+              <div class="input-group" id="update_hire_date">
+
+                <button class="btn btn-outline-secondary update-text" type="button" id="btn_calender_update" disabled>
+                  <i class="fa fa-calendar"></i>
+                </button>
+                <input type="text" class="form-control text-center update-text input-hire-date-year" placeholder="Year" aria-label="Year" aria-describedby="calender_btn" disabled>
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="month-separator-update">-</span>
+                </div>
+                <input type="text" class="form-control text-center update-text input-hire-date-month" placeholder="Month" aria-label="Month" aria-describedby="month-separator" disabled>
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="day-separator-update">-</span>
+                </div>
+                <input type="text" class="form-control text-center update-text input-hire-date-day" placeholder="Day" aria-label="Day" aria-describedby="day-separator" disabled>
+
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning">Update</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

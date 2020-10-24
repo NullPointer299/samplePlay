@@ -1,0 +1,76 @@
+@()
+  @* create modal window*@
+<div class="modal fade" id="createModal" data-backdrop="static" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModalLabel">Create</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="create_employee_id" class="col-form-label">Employee ID:</label>
+            <input type="text" class="form-control input-employee-id" id="create_employee_id" placeholder="Employee ID">
+          </div>
+
+          <div class="form-group">
+            <label for="create_last_name" class="col-form-label">Last name:</label>
+            <input type="text" class="form-control input-last-name" id="create_last_name" placeholder="Last name">
+          </div>
+
+          <div class="form-group">
+            <label for="create_first_name" class="col-form-label">First name:</label>
+            <input type="text" class="form-control input-first-name" id="create_first_name" placeholder="First name">
+          </div>
+
+          <div class="form-group">
+            <label for="create_mail_address" class="col-form-label">Mail address:</label>
+            <input type="text" class="form-control input-mail-address" id="create_mail_address" placeholder="Mail address">
+          </div>
+
+
+          <div class="form-group">
+            <label for="create_hire_date" class="col-form-label">Hire date:</label>
+            <div class="input-group" id="create_hire_date">
+
+              <div class="date" id="datePicker" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" id="inputDatePicker" data-target="#datePicker" hidden/>
+
+                <button class="btn btn-outline-secondary" type="button" id="btn_calender_create" data-target="#datePicker" data-toggle="datetimepicker">
+                  <i class="fa fa-calendar"></i>
+                </button>
+
+              </div>
+              <input type="text" class="form-control text-center input-hire-date-year" id="year_create" placeholder="Year" aria-label="Year" aria-describedby="calender_btn">
+
+
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="month-separator-create">-</span>
+              </div>
+              <input type="text" class="form-control text-center input-hire-date-month" id="month_create" placeholder="Month" aria-label="Month" aria-describedby="month-separator">
+
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="day-separator-create">-</span>
+              </div>
+              <input type="text" class="form-control text-center input-hire-date-day" id="day_create" placeholder="Day" aria-label="Day" aria-describedby="day-separator">
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Create</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import java.util.Date
 
 case class Employee(
                      id: Int,
-                     userId: String,
+                     employeeId: String,
                      lastName: String,
                      firstName: String,
                      mailAddress: String,
